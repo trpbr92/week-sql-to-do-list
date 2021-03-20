@@ -42,10 +42,15 @@ function getList(){
         let el = $('#viewTasks');
         el.empty();
         for (let i = 0; i < response.length; i++) {
+            let completeHTML = `<button data-id="${response[i].id}" class="completeButton">Task Complete</button>`;
+            if (response[i.complete]) {
+                completeHTML = "TASK COMPLETE";
+            }
             el.append(`
         <tr>
             <th>${response[i].task}</th>
             <th>${response[i].complete}</th>
+            <th>${completeHTML}</th>
         </tr>    
             `)
         }//end for
