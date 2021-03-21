@@ -45,13 +45,12 @@ function getList(){
         el.empty();
         for (let i = 0; i < response.length; i++) {
             let completeHTML = `<button data-id="${response[i].id}" class="completeButton">Task Complete</button>`;
-            if (response[i.complete]) {
-                completeHTML = "TASK COMPLETE";
+            if (response[i].complete === true) {
+                completeHTML = "Task Complete";
             }
             el.append(`
         <tr>
             <th>${response[i].task}</th>
-            <th>${response[i].complete}</th>
             <th>${completeHTML}</th>
             <th><button data-id=${response[i].id} class="deleteButton">Delete</button></th>
         </tr>    
