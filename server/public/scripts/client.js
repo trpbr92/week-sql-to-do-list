@@ -1,4 +1,5 @@
 $(document).ready(onReady);
+const bootstrap = require('bootstrap')
 
 function onReady(){
     console.log('JQ');
@@ -46,15 +47,22 @@ function getList(){
         for (let i = 0; i < response.length; i++) {
             let completeHTML = `<button data-id="${response[i].id}" class="completeButton">Task Complete</button>`;
             if (response[i].complete === true) {
-                completeHTML = "Task Complete";
-            }
+                completeHTML = "Completed"
+                el.append(`
+                <tr>
+                    <th><li><s>${response[i].task}</s></li></th>
+                    <th>${completeHTML}</th>
+                    <th><button data-id=${response[i].id} class="deleteButton" aria-label="Close">x</button></th>
+                </tr>    
+                    `)
+            } else{
             el.append(`
         <tr>
-            <th>${response[i].task}</th>
+            <th><li>${response[i].task}</li></th>
             <th>${completeHTML}</th>
-            <th><button data-id=${response[i].id} class="deleteButton">Delete</button></th>
+            <th><button data-id=${response[i].id} class="deleteButton" aria-label="Close">x</button></th>
         </tr>    
-            `)
+            `)}
         }//end for
     }).catch(function(error){
         console.log('error in GET', error);
