@@ -2,9 +2,11 @@ $(document).ready(onReady);
 
 function onReady(){
     console.log('JQ');
+    getList();
     //setup click handler
 $('#addButton').on('click', addTask);
-getList();
+$('#viewTasks').on('click', '.completeButton', updateList);
+$('#viewTasks').on('click', '.deleteButton', deleteTask);
 }//end onReady
 
 
@@ -51,6 +53,7 @@ function getList(){
             <th>${response[i].task}</th>
             <th>${response[i].complete}</th>
             <th>${completeHTML}</th>
+            <th><button data-id=${response[i].id} class="deleteButton">Delete</button></th>
         </tr>    
             `)
         }//end for
@@ -58,3 +61,34 @@ function getList(){
         console.log('error in GET', error);
     })
 }//end getList
+
+function updateList(){
+    const myId = $(this).data ('id',);
+    console.log('in updateList', myId);
+
+$.ajax({
+    method: 'PUT',
+    url: '/list/' + myId
+}).then(function(response){
+    console.log('back from PUT:', response);
+    getList();
+}).catch(function(err){
+    console.log(err);
+    alert('error in PUT');
+})
+}//end updateList
+
+function deleteTask(){
+    const myId = $(this).data('id');
+    console.log('in deleteTask', myId);
+    $.ajax({
+        method: 'DELETE',
+        url: '/list/' + myId
+    }).then(function(response){
+        console.log('back from DELETE with:', response);
+        getList();
+    }).catch(function(err){
+        console.log(err);
+        alert('error in DELETE');
+    })
+}
