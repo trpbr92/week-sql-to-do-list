@@ -78,16 +78,32 @@ $.ajax({
 }//end updateList
 
 function deleteTask(){
+    console.log($(this).data('id'));
     const myId = $(this).data('id');
-    console.log('in deleteTask', myId);
-    $.ajax({
-        method: 'DELETE',
-        url: '/list/' + myId
-    }).then(function(response){
-        console.log('back from DELETE with:', response);
-        getList();
-    }).catch(function(err){
-        console.log(err);
-        alert('error in DELETE');
+    console.log('in deleteTask');
+    swal({
+      title: "WARNING",
+      text: "Would you like to delete your task?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then((deleteTask)=>{
+      if (deleteTask) {
+        swal("Your task has been deleted.",{
+          icon: "success",
+        });
+  
+        $.ajax({
+          method: 'DELETE',
+          url: '/list/' + myId
+        }).then(function(response){
+          console.log('back from DELETE with:', response);
+          getList();
+        }).catch(function(err){
+          console.log(err);
+          alert('error in DELETE');
+        })
+  
+      }//end deleteTask 
     })
 }
