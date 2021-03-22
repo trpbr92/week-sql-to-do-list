@@ -1,8 +1,17 @@
 # Project Name
-
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+Weekly SQL To Do List
 
 ## Description
+Technologies used:
+
+- SQL
+- JQuery
+- Javascript
+- HTML
+- Node
+- Express
+
+![JS](new.png)
 
 Your project description goes here. What problem did you solve? How did you solve it?
 
